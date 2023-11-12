@@ -4,28 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>{{file_name}}</title>
+    <title>Table {{filename}}</title>
+
 </head>
 <body>
-    {% if row %}
-    <table>
-        <thead>
-            <tr>
-                {% for col in columns %}
-                    <th>{{col}}</th>
-        </thead>
-        <tbody>
-            {% for row in rows[1:] %}
-                <tr>
-                    {for v in row %}
-                    <td>{{v}}</td>
-                    {% endfor %}
-                </tr>
+    <h1>{{ filename }}</h1>
+    <div>
+        <table>
+            {% for table in tables %}
+            <h2>{{titles[loop.index]}}</h2>
+            {{ table|safe }}
             {% endfor %}
-        </tbody>
-    </table>
-    {% endif %}
-
+        </table>
+    </div>
 
 </body>
 </html>
