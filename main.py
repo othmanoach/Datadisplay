@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.express as px
 import seaborn as sns
 import altair as alt
-
-
+import plotly.figure_factory as ff
+from chart import *
 st.title("Import your .CSV file here:")
 st.markdown("---")
 file = st.file_uploader("Choose a .csv file", type=["csv"])
@@ -25,20 +25,27 @@ if file is not None:
 
         x = st.selectbox("Select X value", df.columns)
         y = st.selectbox("Select Y value", df.columns)
+        x_dtype = df[x].dtype
+        y_dtype = df[y].dtype
+        print(x_dtype, y_dtype)
 
         type_chart = st.selectbox(
             "Select chart type",
-            ["Simple bar charts", "Line plot", "Pie", "Scatter", "Boxplot"],
+            ["Histogram", "Line plot", "Pie", "Scatter", "Boxplot"],
         )
         st.header(type_chart)
 
-        if type_chart == "Simple bar charts":
-            st.bar_chart(head, x=x, y=y)
+        if type_chart == "Histogram":
+            histogram(head,x,y)
+            # fig = px.histogram(head, x=x, y=y)
+            # st.plotly_chart(fig, use_container_width=True)
+            # st.bar_chart(head, x=x, y=y)
+        # ------------------------------------------------------------------------
         elif type_chart == "Pie":
-            fig = px.pie(head, names=x, values=y)
-            st.plotly_chart(fig)
+            pie(head, x, y)
+        # ------------------------------------------------------------------------
         elif type_chart == "Line plot":
-            st.line_chart(head, x=x, y=y)
+            line_plot(head, x, y)
         elif type_chart == "Scatter":
             st.scatter_chart(head, x=x, y=y)
         elif type_chart == "Boxplot":
@@ -58,3 +65,16 @@ if file is not None:
 
 # stuff to add:
 # 10 figure  dans le cours data visualisation seaborn
+
+# """pie""" DONE
+# """line plot""" DONE
+# Scatter plot
+# Boxplot
+# Histogram
+# KDE plot
+# Violin plot
+# Bar plot
+# 8. Heatmap
+# add median mode moyenne ect....
+#
+#
