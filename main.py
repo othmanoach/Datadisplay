@@ -5,6 +5,7 @@ import seaborn as sns
 import altair as alt
 import plotly.figure_factory as ff
 from chart import *
+
 st.title("Import your .CSV file here:")
 st.markdown("---")
 file = st.file_uploader("Choose a .csv file", type=["csv"])
@@ -31,12 +32,22 @@ if file is not None:
 
         type_chart = st.selectbox(
             "Select chart type",
-            ["Histogram", "Line plot", "Pie", "Scatter", "Boxplot"],
+            [
+                "Histogram",
+                "Line plot",
+                "Pie",
+                "Scatter",
+                "Boxplot",
+                "KDE plot",
+                "Bar plot",
+                "Scatter plot",
+                " Heatmap",
+            ],
         )
         st.header(type_chart)
 
         if type_chart == "Histogram":
-            histogram(head,x,y)
+            histogram(head, x, y)
             # fig = px.histogram(head, x=x, y=y)
             # st.plotly_chart(fig, use_container_width=True)
             # st.bar_chart(head, x=x, y=y)
@@ -48,17 +59,9 @@ if file is not None:
             line_plot(head, x, y)
         elif type_chart == "Scatter":
             st.scatter_chart(head, x=x, y=y)
-        elif type_chart == "Boxplot":
-            chart = (
-                alt.Chart(head)
-                .mark_boxplot(extent="min-max")
-                .encode(
-                    x=alt.X(x, title=x),
-                    y=alt.Y(y, title=y),
-                )
-            )
-            # st.altair_chart(chart, theme="streamlit", use_container_width=True)
 
+        elif type_chart == "Boxplot":
+            boxplot(head, x=x, y=y)
     with col1:
         st.header("Dataframe")
         st.dataframe(head)
@@ -68,13 +71,14 @@ if file is not None:
 
 # """pie""" DONE
 # """line plot""" DONE
-# Scatter plot
-# Boxplot
-# Histogram
+# """Scatter plot""" DONE
+# """Histogram""" DONE
+# """Boxplot""" DONE (?)
 # KDE plot
 # Violin plot
 # Bar plot
 # 8. Heatmap
-# add median mode moyenne ect....
+
+# add median mode moyenne ect.... OPTIONEL
 #
 #

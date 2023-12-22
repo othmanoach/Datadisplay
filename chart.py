@@ -46,19 +46,43 @@ def line_plot(data, x, y):
         st.line_chart(data, x=x, y=y)
 
 
-def histogram(data, x, y):
+def histogram(data, x, y=None):
     """create histogram chart"""
     x_dtype = data[x].dtype
     y_dtype = data[y].dtype
     if x == y:
         st.error("X and Y should be different", icon=warn)
-    elif x_dtype == y_dtype == "object":
-        st.error("X and Y should be both numeric variable for an histogram", icon=warn)
-    elif len(data) < 2:
+    elif x_dtype == "object":
+        st.error("X should be a numeric variable for an histogram", icon=warn)
+    elif y and y_dtype == "object":
+        st.error("Y should be a numeric variable for an histogram", icon=warn)
+    elif len(data) < 1:
         st.error(
             "Insufficient data points for an histogram. Please choose a different dataset or adjust the number of lines.",
             icon=warn,
         )
     else:
-        fig = px.histogram(data, x=x, y=y)
+        if y:
+            fig = px.histogram(data, x=x, y=y)
+        else:
+            fig = px.histogram(data, x=x)
         st.plotly_chart(fig, use_container_width=True)
+
+
+def boxplot(data, x, y):
+    """create boxplot chart"""
+    x_dtype = data[x].dtype
+    y_dtype = data[y].dtype
+    if x_dtype != "object" or y_dtype == "object":
+        st.error(
+            "X should be a categorical variable and Y should be a numeric variable for a boxplot",
+            icon=warn,
+        )
+    else:
+        fig = px.box(data, x=x, y=y, points="all")
+        st.plotly_chart(fig)
+    # else:
+    #     st.error(
+    #         "X should be a categorical variable and Y should be a numeric variable for a boxplot",
+    #         icon=warn,
+    #     )
