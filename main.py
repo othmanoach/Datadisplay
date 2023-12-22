@@ -5,6 +5,7 @@ import seaborn as sns
 import altair as alt
 import plotly.figure_factory as ff
 from chart import *
+from selectbox import chose
 
 st.title("Import your .CSV file here:")
 st.markdown("---")
@@ -28,7 +29,7 @@ if file is not None:
         y = st.selectbox("Select Y value", df.columns)
         x_dtype = df[x].dtype
         y_dtype = df[y].dtype
-        print(x_dtype, y_dtype)
+        # print(x_dtype, y_dtype)
 
         type_chart = st.selectbox(
             "Select chart type",
@@ -36,35 +37,26 @@ if file is not None:
                 "Histogram",
                 "Line plot",
                 "Pie",
-                "Scatter",
                 "Boxplot",
                 "KDE plot",
                 "Bar plot",
                 "Scatter plot",
-                " Heatmap",
+                "Heatmap",
+                "Violin plot",
             ],
         )
         st.header(type_chart)
-
-        if type_chart == "Histogram":
-            histogram(head, x, y)
-            # fig = px.histogram(head, x=x, y=y)
-            # st.plotly_chart(fig, use_container_width=True)
-            # st.bar_chart(head, x=x, y=y)
-        # ------------------------------------------------------------------------
-        elif type_chart == "Pie":
-            pie(head, x, y)
-        # ------------------------------------------------------------------------
-        elif type_chart == "Line plot":
-            line_plot(head, x, y)
-        elif type_chart == "Scatter":
-            st.scatter_chart(head, x=x, y=y)
-
-        elif type_chart == "Boxplot":
-            boxplot(head, x=x, y=y)
-    with col1:
-        st.header("Dataframe")
-        st.dataframe(head)
+        print(len(head))
+        if len(head) < 1:
+            st.error(
+                "Insufficient data points. Please choose a different dataset or adjust the number of lines.",
+                icon="⚠️",
+            )
+        else:
+            chose(type_chart, head, x, y)
+        with col1:
+            st.header("Dataframe")
+            st.dataframe(head)
 
 # stuff to add:
 # 10 figure  dans le cours data visualisation seaborn
@@ -73,12 +65,33 @@ if file is not None:
 # """line plot""" DONE
 # """Scatter plot""" DONE
 # """Histogram""" DONE
-# """Boxplot""" DONE (?)
-# KDE plot
+# """Boxplot""" DONE
+# """KDE plot""" DOne
 # Violin plot
-# Bar plot
-# 8. Heatmap
+# """Bar plot"""
+# Heatmap
 
 # add median mode moyenne ect.... OPTIONEL
 #
 #
+#     if type_chart == "Histogram":
+#         histogram(head, x, y)
+#     # ------------------------------------------------------------------------
+#     elif type_chart == "Pie":
+#         pie(head, x, y)
+#     # ------------------------------------------------------------------------
+#     elif type_chart == "Line plot":
+#         line_plot(head, x, y)
+#     elif type_chart == "Scatter plot":
+#         scatter_chart(head, x, y)
+
+#     elif type_chart == "Boxplot":
+#         boxplot(head, x, y)
+#     elif type_chart == "Bar plot":
+#         bar_plot(head, x, y)
+#     elif type_chart == "KDE plot":
+#         kde_plot(head, x, y)
+#     elif type_chart == "Violin plot":
+#         violin_plot(head, x, y)
+#     elif type_chart == "Heatmap":
+#         heatmap(head, x, y)
