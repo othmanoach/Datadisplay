@@ -46,8 +46,8 @@ if file is not None:
             ],
         )
         st.header(type_chart)
-        print(len(head))
-        if len(head) < 1:
+        # print(len(head))
+        if len(head) < 2:
             st.error(
                 "Insufficient data points. Please choose a different dataset or adjust the number of lines.",
                 icon="⚠️",
@@ -67,31 +67,6 @@ if file is not None:
 # """Histogram""" DONE
 # """Boxplot""" DONE
 # """KDE plot""" DOne
-# Violin plot
+# """Violin plot"""
 # """Bar plot"""
-# Heatmap
-
-# add median mode moyenne ect.... OPTIONEL
-#
-#
-#     if type_chart == "Histogram":
-#         histogram(head, x, y)
-#     # ------------------------------------------------------------------------
-#     elif type_chart == "Pie":
-#         pie(head, x, y)
-#     # ------------------------------------------------------------------------
-#     elif type_chart == "Line plot":
-#         line_plot(head, x, y)
-#     elif type_chart == "Scatter plot":
-#         scatter_chart(head, x, y)
-
-#     elif type_chart == "Boxplot":
-#         boxplot(head, x, y)
-#     elif type_chart == "Bar plot":
-#         bar_plot(head, x, y)
-#     elif type_chart == "KDE plot":
-#         kde_plot(head, x, y)
-#     elif type_chart == "Violin plot":
-#         violin_plot(head, x, y)
-#     elif type_chart == "Heatmap":
-#         heatmap(head, x, y)
+# """Heatmap"""

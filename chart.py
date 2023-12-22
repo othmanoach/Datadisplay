@@ -52,11 +52,6 @@ def histogram(data, x, y=None):
         st.error("X should be a numeric variable for an histogram", icon=warn)
     elif y and y_dtype == "object":
         st.error("Y should be a numeric variable for an histogram", icon=warn)
-    elif len(data) < 1:
-        st.error(
-            "Insufficient data points for an histogram. Please choose a different dataset or adjust the number of lines.",
-            icon=warn,
-        )
     else:
         if y:
             fig = px.histogram(data, x=x, y=y)
@@ -145,13 +140,14 @@ def heatmap(data, x, y):
     """create heatmap"""
     x_dtype = data[x].dtype
     y_dtype = data[y].dtype
-    if x_dtype != "object" or y_dtype == "object":
+    if x_dtype != "object" or y_dtype != "object":
         st.error(
-            "X should be a categorical variable and Y should be a numeric variable for a violin plot",
+            "X and Y should be a categorical variable for a Heatmap",
             icon=warn,
         )
     elif x == y:
         st.error("X and Y should be different", icon=warn)
     else:
+        # heatmap_data = data.pivot(index=x, columns=y)
         fig = px.imshow(data)
-        st.plotly_chart(fig, sharing="streamlit")
+        st.plotly_chart(fig, theme="streamlit")
