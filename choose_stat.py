@@ -25,7 +25,7 @@ def choose(type_chart, data, x, y):
         case "Violin plot":
             violin_plot(data, x, y)
         case "Heatmap":
-            heatmap(data, x, y)
+            heatmap(data)
 
 
 def table_stat(df, col):

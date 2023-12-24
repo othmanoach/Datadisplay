@@ -133,17 +133,7 @@ def violin_plot(data, x, y):
         st.plotly_chart(fig)
 
 
-def heatmap(data, x, y):
+def heatmap(data):
     """create heatmap"""
-    x_dtype = data[x].dtype
-    y_dtype = data[y].dtype
-    if x_dtype != "object" or y_dtype != "object":
-        st.error(
-            "X and Y should be a categorical variable for a Heatmap",
-            icon=warn,
-        )
-    elif x == y:
-        st.error("X and Y should be different", icon=warn)
-    else:
-        fig = px.imshow(data)
-        st.plotly_chart(fig, theme="streamlit")
+    fig = px.imshow(data)
+    st.plotly_chart(fig, theme="streamlit")
