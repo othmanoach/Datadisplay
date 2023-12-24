@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import seaborn as sns
-import altair as alt
-import plotly.figure_factory as ff
+# import plotly.figure_factory as ff
 
 
 """charts"""
@@ -33,7 +32,7 @@ def line_plot(data, x, y):
     y_dtype = data[y].dtype
     if x_dtype not in ["float64", "int64", "datetime64[ns]"]:
         st.error(
-            "X should be a numeric or datetime variable for a line plot.",
+            "X should be a numeric variable for a line plot.",
             icon=warn,
         )
     elif y_dtype not in ["float64", "int64", "datetime64[ns]"]:

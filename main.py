@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import seaborn as sns
 import altair as alt
-import plotly.figure_factory as ff
+# import plotly.figure_factory as ff
 from chart import *
 from selectbox import chose
 
