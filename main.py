@@ -1,11 +1,10 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import seaborn as sns
 import altair as alt
-# import plotly.figure_factory as ff
 from chart import *
-from selectbox import chose
+from selectbox import *
+from statistics import median, mean, mode
 
 st.title("Import your .CSV file here:")
 st.markdown("---")
@@ -45,6 +44,16 @@ if file is not None:
                 "Violin plot",
             ],
         )
+
+        #     for i in df[x]:
+        #         print(i)
+        #         s = s+i
+        #     s = s/len(df[x])
+        #     print(s)
+        #     st.write("Mean of ",x,":",s)
+
+        # st.text(s/len(df[x]))
+
         st.header(type_chart)
         # print(len(head))
         if len(head) < 2:
@@ -57,6 +66,14 @@ if file is not None:
         with col1:
             st.header("Dataframe")
             st.dataframe(head)
+            if x_dtype != "object":
+                st.write("Mean of ", x, ":", mean(df[x]))
+                st.write("Median of ",x,":",median(df[x]))
+                st.write("Mode of ",x,":",mode(df[x]))
+            if y_dtype != "object":
+                st.write("Mean of ", y, ":", mean(df[y]))
+                st.write("Median of ",y,":",median(df[y]))
+                st.write("Mode of ",y,":",mode(df[y]))
 
 # stuff to add:
 # 10 figure  dans le cours data visualisation seaborn
