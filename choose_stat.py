@@ -1,7 +1,8 @@
 from chart import *
+from statistics import median, mean, mode
 
 
-def chose(type_chart, data, x, y):
+def choose(type_chart, data, x, y):
     """cases of selectbox"""
     match type_chart:
         case "Histogram":
@@ -25,3 +26,17 @@ def chose(type_chart, data, x, y):
             violin_plot(data, x, y)
         case "Heatmap":
             heatmap(data, x, y)
+
+
+def table_stat(df, col):
+    """Statistics of columns"""
+    col_dtype = df[col].dtype
+    if col_dtype != "object":
+        col_stats = {
+            "Mean": mean(df[col]),
+            "Median": median(df[col]),
+            "Mode": mode(df[col]),
+            "Rang": range(df[col]),
+        }
+        st.write(f"Statistics for {col}:")
+        st.table(col_stats)

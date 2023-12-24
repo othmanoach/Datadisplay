@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import seaborn as sns
-# import plotly.figure_factory as ff
 
 
 """charts"""
@@ -147,6 +146,5 @@ def heatmap(data, x, y):
     elif x == y:
         st.error("X and Y should be different", icon=warn)
     else:
-        # heatmap_data = data.pivot(index=x, columns=y)
         fig = px.imshow(data)
         st.plotly_chart(fig, theme="streamlit")

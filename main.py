@@ -1,10 +1,7 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
-import altair as alt
 from chart import *
-from selectbox import *
-from statistics import median, mean, mode
+from choose_stat import *
 
 st.title("Import your .CSV file here:")
 st.markdown("---")
@@ -52,28 +49,9 @@ if file is not None:
                 icon="⚠️",
             )
         else:
-            chose(type_chart, head, x, y)
+            choose(type_chart, head, x, y)
         with col1:
             st.header("Dataframe")
             st.dataframe(head)
-            if x_dtype != "object":
-                st.write("Mean of ", x, ":", mean(df[x]))
-                st.write("Median of ",x,":",median(df[x]))
-                st.write("Mode of ",x,":",mode(df[x]))
-            if y_dtype != "object":
-                st.write("Mean of ", y, ":", mean(df[y]))
-                st.write("Median of ",y,":",median(df[y]))
-                st.write("Mode of ",y,":",mode(df[y]))
-
-# stuff to add:
-# 10 figure  dans le cours data visualisation seaborn
-
-# """pie""" DONE
-# """line plot""" DONE
-# """Scatter plot""" DONE
-# """Histogram""" DONE
-# """Boxplot""" DONE
-# """KDE plot""" DOne
-# """Violin plot"""
-# """Bar plot"""
-# """Heatmap"""
+            table_stat(df, x)
+            table_stat(df, y)
