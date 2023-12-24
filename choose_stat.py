@@ -36,7 +36,6 @@ def table_stat(df, col):
             "Mean": mean(df[col]),
             "Median": median(df[col]),
             "Mode": mode(df[col]),
-            "Rang": range(df[col]),
         }
         st.write(f"Statistics for {col}:")
         st.table(col_stats)
