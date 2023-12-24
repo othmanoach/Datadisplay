@@ -44,16 +44,6 @@ if file is not None:
                 "Violin plot",
             ],
         )
-
-        #     for i in df[x]:
-        #         print(i)
-        #         s = s+i
-        #     s = s/len(df[x])
-        #     print(s)
-        #     st.write("Mean of ",x,":",s)
-
-        # st.text(s/len(df[x]))
-
         st.header(type_chart)
         # print(len(head))
         if len(head) < 2:
